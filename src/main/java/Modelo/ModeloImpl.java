@@ -25,7 +25,7 @@ public class ModeloImpl implements Modelo{
     InputStream miInputStram;
     FileOutputStream miFileOutputStream;
 
-    File directorioDescargas=new File("src\\datosDescargados");
+    File directorioDescargas=new File("src\\main\\java\\datosDescargados");
     File directorioDatosTratados=new File("src\\main\\java\\datosTratados");
    
 
