@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.CSV;
 import Modelo.Modelo;
 import Vista.Vista;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.logging.Logger;
 public class ControladorImpl implements Controlador {
         Modelo modelo ;
         Vista vista;
+        CSV csv ;
     
     public ControladorImpl(Modelo modelo, Vista vista){
         
@@ -28,6 +30,10 @@ public class ControladorImpl implements Controlador {
                 pasarUrlAModelo();
                 pasarRutaArchivosAModelor();
                 modelo.descargarFichero("");
+                csv = new CSV(vista.getListaArchivos().get(0),vista.getArchivoEscritura());
+                csv.leerCsv();
+                csv.selecionarDatosCsv(vista.getColumnasCsv());
+                csv.decirHola();
             } catch (IOException ex) {
                 Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -43,7 +43,7 @@ public class CSV {
         escribirEnCsv.writeNext(columnasCsv);
     }
     
-    public void leerCsv(String ruta) throws IOException{
+    public void leerCsv() throws IOException{
       datosCsv = leerDeCsv.readAll();
 
     }
@@ -56,14 +56,22 @@ public class CSV {
         
         int[] numeroColumna = new int[columnasCsv.length-1];
         //solo nos interesa el primer array que contien los tipos de datos
-        for (int j = 0; j < columnasCsv.length-1; j++) {
-            for (int i = 0; i < datosCsv.get(0).length; i++) {
+        for (int i = 0; i < datosCsv.get(0).length; i++) {
+            for (int j = 0; j < columnasCsv.length-1; j++) {
+            
                 if (datosCsv.get(0)[i].equals(columnasCsv[j])){
                     numeroColumna[j]=i;
                     break;
                 }
             }//2ºFor 
-        }//1ºFor 
+        }//1ºFor
+        for (int i = 0; i < numeroColumna.length; i++) {
+            System.out.println(numeroColumna[i]);
+            
+        }
+    }
+    public void decirHola(){
+        System.out.println("Hola");
     }
     
 }

@@ -14,4 +14,6 @@ public interface Vista {
     
     public String[] getColumnasCsv();
     
+    public String getArchivoEscritura();
+    
 }

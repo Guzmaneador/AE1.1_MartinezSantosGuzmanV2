@@ -18,5 +18,6 @@ public class Main {
         Controlador controlador = new ControladorImpl(modelo,vista);
         controlador.ejecucion();
     }
+
 }
 //Librerioa opncsv

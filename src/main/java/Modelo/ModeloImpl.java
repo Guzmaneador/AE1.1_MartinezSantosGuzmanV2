@@ -27,6 +27,8 @@ public class ModeloImpl implements Modelo{
 
     File directorioDescargas=new File("src\\main\\java\\datosDescargados");
     File directorioDatosTratados=new File("src\\main\\java\\datosTratados");
+    
+    
    
 
     public ModeloImpl() {
