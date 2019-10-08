@@ -27,9 +27,9 @@ public class VistaImpl implements Vista{
         listaArchivos.add("src\\main\\java\\datosDescargados\\Vidrio.csv");
         listaArchivos.add("src\\main\\java\\datosDescargados\\Envases.csv");
  
-        this.columnasCsv = new String[]{"CODCALLE", "TEXTO", "CAPACIDAD", "NOTAS", "UTM_X", "UTM_Y", "TIPO"};
+        this.columnasCsv = new String[]{"CODCALLE", "TEXTO", "CAPACIDAD", "UTM_X", "UTM_Y", "NOTAS", "TIPO"};
         
-        archivoEscritura = "src\\main\\java\\datosTratados";
+        archivoEscritura = "src\\main\\java\\datosTratados\\Contenedores.csv";
         
     }
 

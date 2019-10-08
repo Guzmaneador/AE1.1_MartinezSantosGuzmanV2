@@ -28,11 +28,11 @@ public class ModeloImpl implements Modelo{
     File directorioDescargas=new File("src\\main\\java\\datosDescargados");
     File directorioDatosTratados=new File("src\\main\\java\\datosTratados");
     
-    
+        public CSV csv ;
    
 
     public ModeloImpl() {
-        
+        csv =new CSV();
         directorioDescargas.mkdir();
         directorioDatosTratados.mkdir();
         listaFicheros= new ArrayList<>();

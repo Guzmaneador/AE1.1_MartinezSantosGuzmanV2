@@ -8,6 +8,11 @@ import java.net.MalformedURLException;
  * @author 2dama
  */
 public interface Modelo {
+
+    /**
+     *
+     */
+     public  CSV csv  =new CSV();
     
      public void introducirFicheroEnLista(String nombre);
      

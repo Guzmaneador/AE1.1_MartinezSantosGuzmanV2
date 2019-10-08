@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class ControladorImpl implements Controlador {
         Modelo modelo ;
         Vista vista;
-        CSV csv ;
+//        CSV csv ;
     
     public ControladorImpl(Modelo modelo, Vista vista){
         
@@ -30,10 +30,18 @@ public class ControladorImpl implements Controlador {
                 pasarUrlAModelo();
                 pasarRutaArchivosAModelor();
                 modelo.descargarFichero("");
-                csv = new CSV(vista.getListaArchivos().get(0),vista.getArchivoEscritura());
-                csv.leerCsv();
-                csv.selecionarDatosCsv(vista.getColumnasCsv());
-                csv.decirHola();
+                modelo.csv.setRutaCsvEscritura(vista.getArchivoEscritura());
+                modelo.csv.introducirCamposColumna(vista.getColumnasCsv());
+                modelo.csv.setRutaCsvLectura(vista.getListaArchivos().get(0));
+                modelo.csv.leerCsv();
+                modelo.csv.selecionarDatosCsv(vista.getColumnasCsv());
+                modelo.csv.finalizarCsv();
+//                csv = new CSV();
+//                  csv.setRutaCsvEscritura(vista.getArchivoEscritura());
+//                  csv.setRutaCsvLectura(vista.getListaArchivos().get(0));
+//                csv.leerCsv();
+//                csv.selecionarDatosCsv(vista.getColumnasCsv());
+
             } catch (IOException ex) {
                 Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
