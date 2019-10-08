@@ -36,6 +36,11 @@ public class ControladorImpl implements Controlador {
                 modelo.csv.leerCsv();
                 modelo.csv.selecionarDatosCsv(vista.getColumnasCsv());
                 modelo.csv.finalizarCsv();
+                                
+//                modelo.csv.setRutaCsvEscritura(vista.getArchivoEscritura());
+//                modelo.csv.setRutaCsvLectura(vista.getListaArchivos().get(0));
+//                modelo.csv.escribirCsv(vista.getColumnasCsv());
+//                modelo.csv.finalizarCsv();
 //                csv = new CSV();
 //                  csv.setRutaCsvEscritura(vista.getArchivoEscritura());
 //                  csv.setRutaCsvLectura(vista.getListaArchivos().get(0));

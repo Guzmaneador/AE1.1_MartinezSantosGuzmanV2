@@ -59,13 +59,11 @@ public class CSV {
     }
 /////////////////
     public void introducirCamposColumna(String[] columnasCsv){
-        escribirEnCsv.writeNext(columnasCsv);
+        escribirEnCsv.writeNext(columnasCsv,true);
+        System.out.println("hola");
     }
     
-    public void leerCsv() throws IOException{
-      datosCsv = leerDeCsv.readAll();
 
-    }
          /*Creamos un array con tantos espacion como culumnas vamos a tener en el nuevo 
         fichero csv de esta froma en el alamcenaremos la posicion de la columna que
         nos interesa en el archvio q vamos a copiar, le restamos uno por la columna 
@@ -92,7 +90,39 @@ public class CSV {
     public void finalizarCsv() throws IOException{
         leerDeCsv.close();
         escribirEnCsv.close();
+       
     }
+    //LECTURA Y ESCRITURA 
+    public void leerCsv() throws IOException{
+      datosCsv = leerDeCsv.readAll();
+      
+
+    }
+    public void escribirCsv(String[] columnasCsv) throws IOException{
+        
+        String[] fila = null;
+        String[] contenido = new String[columnasCsv.length];
+        int contador=0;
+        while((fila = leerDeCsv.readNext()) != null) {
+            if(contador!=0){
+                for (int i = 0; i < posicionColumna.length; i++) {
+                    contenido[i] = fila[posicionColumna[i]];
+                }
+                //datosCsv.add(contenido);
+                escribirEnCsv.writeNext(contenido,true);
+            }
+            contador++;
+            
+            
+//        System.out.println(fila[0]
+//              + " | " + fila[1]
+//              + " |  " + fila[2]);
+        }
+//        escribirEnCsv.writeAll(datosCsv);
+        
+        
+    }
+    
 
     
 }
