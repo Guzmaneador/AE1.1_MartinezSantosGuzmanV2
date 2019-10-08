@@ -35,12 +35,15 @@ public class ControladorImpl implements Controlador {
                 modelo.csv.setRutaCsvLectura(vista.getListaArchivos().get(0));
                 modelo.csv.leerCsv();
                 modelo.csv.selecionarDatosCsv(vista.getColumnasCsv());
-                modelo.csv.finalizarCsv();
+               // modelo.csv.finalizarCsv();
                                 
-//                modelo.csv.setRutaCsvEscritura(vista.getArchivoEscritura());
-//                modelo.csv.setRutaCsvLectura(vista.getListaArchivos().get(0));
-//                modelo.csv.escribirCsv(vista.getColumnasCsv());
-//                modelo.csv.finalizarCsv();
+             modelo.csv.setRutaCsvLectura(vista.getListaArchivos().get(0));
+                modelo.csv.obtenerDatosCsv(vista.getColumnasCsv());
+                modelo.csv.escribirCsv();               
+                modelo.csv.finalizarLecturaCsv();
+                modelo.csv.finalizarEscrituraCsv();
+                
+                
 //                csv = new CSV();
 //                  csv.setRutaCsvEscritura(vista.getArchivoEscritura());
 //                  csv.setRutaCsvLectura(vista.getListaArchivos().get(0));
@@ -66,6 +69,13 @@ public class ControladorImpl implements Controlador {
             modelo.introducirFicheroEnLista(listaArchivos.get(i));
             modelo.crearFichero(listaArchivos.get(i));
         }
+    }
+    
+    private void almacenarContenidoCsv(ArrayList<String> listaArchivos){
+        for (int i = 0; i < listaArchivos.size(); i++) {
+            
+        }
+        
     }
     
 }

@@ -20,6 +20,7 @@ public class CSV {
     String rutaCsvEscritura;
     String rutaCsvLectura;
     List<String[]> datosCsv;
+    List<String[]> datosCsvEscribir;
 
     CSVWriter escribirEnCsv;
     CSVReader leerDeCsv;
@@ -28,6 +29,7 @@ public class CSV {
     int[] posicionColumna ;
 
     public CSV() {
+        datosCsvEscribir =new  ArrayList<>();
     }
 
     public CSV(String rutaCsvLectura, String rutaCsvEscritura) {
@@ -59,8 +61,9 @@ public class CSV {
     }
 /////////////////
     public void introducirCamposColumna(String[] columnasCsv){
-        escribirEnCsv.writeNext(columnasCsv,true);
-        System.out.println("hola");
+          datosCsvEscribir.add(columnasCsv);
+//        escribirEnCsv.writeNext(columnasCsv,true);
+//        System.out.println("hola");
     }
     
 
@@ -87,10 +90,11 @@ public class CSV {
         }
     }
     
-    public void finalizarCsv() throws IOException{
+    public void finalizarLecturaCsv() throws IOException{
         leerDeCsv.close();
+    }
+    public void finalizarEscrituraCsv() throws IOException{
         escribirEnCsv.close();
-       
     }
     //LECTURA Y ESCRITURA 
     public void leerCsv() throws IOException{
@@ -98,8 +102,7 @@ public class CSV {
       
 
     }
-    public void escribirCsv(String[] columnasCsv) throws IOException{
-        
+    public void obtenerDatosCsv(String[] columnasCsv) throws IOException{
         String[] fila = null;
         String[] contenido = new String[columnasCsv.length];
         int contador=0;
@@ -108,19 +111,16 @@ public class CSV {
                 for (int i = 0; i < posicionColumna.length; i++) {
                     contenido[i] = fila[posicionColumna[i]];
                 }
-                //datosCsv.add(contenido);
-                escribirEnCsv.writeNext(contenido,true);
+                datosCsvEscribir.add(contenido);
+                //escribirEnCsv.writeNext(contenido,true);
             }
             contador++;
-            
-            
-//        System.out.println(fila[0]
-//              + " | " + fila[1]
-//              + " |  " + fila[2]);
         }
-//        escribirEnCsv.writeAll(datosCsv);
-        
-        
+    }
+    
+    
+    public void escribirCsv() throws IOException{     
+        escribirEnCsv.writeAll(datosCsvEscribir);     
     }
     
 
