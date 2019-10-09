@@ -13,14 +13,8 @@ public class Contenedor {
     String nota;
     String tipo;
 
-    public Contenedor(float codcalle, String texto, long capacidad, long utm_x, long utm_y, String nota, String tipo) {
-        this.codcalle = codcalle;
-        this.texto = texto;
-        this.capacidad = capacidad;
-        this.utm_x = utm_x;
-        this.utm_y = utm_y;
-        this.nota = nota;
-        this.tipo = tipo;
+    public Contenedor() {
+
     }
 
     public float getCodcalle() {

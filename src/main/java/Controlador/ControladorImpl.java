@@ -45,6 +45,7 @@ public class ControladorImpl implements Controlador {
                 
                 DAT archivoDat = new DAT(vista.getArchivoBinario());
                 archivoDat.obtenerContendoresDeCsv(vista.getArchivoEscritura());
+                System.out.println(archivoDat.readString());
                
                 
                 
