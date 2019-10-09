@@ -106,6 +106,7 @@ public class CSV {
 
     }
     public void obtenerDatosCsv(String[] columnasCsv) throws IOException{
+        
         String[] fila = null;
         String[] contenido = new String[columnasCsv.length];
         int contador=0;
@@ -127,7 +128,7 @@ public class CSV {
     
     
     public void escribirCsv() throws IOException{     
-        //escribirEnCsv.writeAll(datosCsvEscribir);     
+        escribirEnCsv.writeAll(datosCsvEscribir);     
     }
     
     public String optenerTipo(){

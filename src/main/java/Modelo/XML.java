@@ -32,21 +32,38 @@ public class XML {
         CSVReader csvReader = new CSVReader(new FileReader(rutaCsv));
         String[] fila = null;
         while((fila = csvReader.readNext()) != null) {
-            Element contnedor = documentoXML.createElement("contendor");
-            contnedor.setAttribute("tipo=", fila[6]);
-            documentoXML.getDocumentElement().appendChild(contnedor);
+            Element contenedor = documentoXML.createElement("contendor");
+            contenedor.setAttribute("tipo=", fila[6]);
+            documentoXML.getDocumentElement().appendChild(contenedor);
             
             //Creamos las etiquetas
             Element codCalle = documentoXML.createElement("codcalle");
             Text valorCodCalle = documentoXML.createTextNode(fila[0]);
+            contenedor.appendChild(codCalle);
+            codCalle.appendChild(valorCodCalle);
+            
             Element nombreCalle = documentoXML.createElement("nombreCalle");
             Text valorNombreCalle = documentoXML.createTextNode(fila[1]);
+            contenedor.appendChild(nombreCalle);
+            nombreCalle.appendChild(valorNombreCalle);
+            
             Element descripcion = documentoXML.createElement("descripcion");
-            Text valorDescripcion = documentoXML.createTextNode(fila[2]);
+            Text valorDescripcion = documentoXML.createTextNode(fila[5]);
+            contenedor.appendChild(descripcion);
+            descripcion.appendChild(valorDescripcion);
+            
             Element utmX = documentoXML.createElement("utm_X");
             Text valorUtmX = documentoXML.createTextNode(fila[3]);
+            contenedor.appendChild(utmX);
+            utmX.appendChild(valorUtmX);
+            
+            
             Element utmY = documentoXML.createElement("utm_Y");
-            Text valorUtmY = documentoXML.createTextNode(fila[2]);
+            Text valorUtmY = documentoXML.createTextNode(fila[4]);
+            contenedor.appendChild(utmY);
+            utmY.appendChild(valorUtmY);
+            
+            //Introducimos las etiqueta
             
             
             

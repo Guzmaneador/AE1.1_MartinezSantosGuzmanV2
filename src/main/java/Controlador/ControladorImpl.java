@@ -3,11 +3,13 @@ package Controlador;
 import Modelo.CSV;
 import Modelo.DAT;
 import Modelo.Modelo;
+import Modelo.XML;
 import Vista.Vista;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  *
@@ -46,12 +48,16 @@ public class ControladorImpl implements Controlador {
                 DAT archivoDat = new DAT(vista.getArchivoBinario());
                 archivoDat.obtenerContendoresDeCsv(vista.getArchivoEscritura());
                 System.out.println(archivoDat.readString());
+                
+                XML xml = new XML();
+                
+                xml.obtenerContendoresDeCsv(vista.getArchivoEscritura());
                
                 
                 
 
 
-            } catch (IOException ex) {
+            } catch (IOException | ParserConfigurationException ex) {
                 Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         
