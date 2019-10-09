@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -19,13 +20,14 @@ import java.util.logging.Logger;
 public class CSV {
     String rutaCsvEscritura;
     String rutaCsvLectura;
+    
     List<String[]> datosCsv;
     List<String[]> datosCsvEscribir;
 
     CSVWriter escribirEnCsv;
     CSVReader leerDeCsv;
     
-    
+
     int[] posicionColumna ;
 
     public CSV() {
@@ -71,6 +73,7 @@ public class CSV {
         fichero csv de esta froma en el alamcenaremos la posicion de la columna que
         nos interesa en el archvio q vamos a copiar, le restamos uno por la columna 
         "TIPO" que vamos a agregar nosotros*/
+    
     public void selecionarDatosCsv(String[] columnasCsv){
         
         posicionColumna = new int[columnasCsv.length-2];
@@ -110,9 +113,13 @@ public class CSV {
             if(contador!=0){
                 for (int i = 0; i < posicionColumna.length; i++) {
                     contenido[i] = fila[posicionColumna[i]];
+                   contenido[contenido.length-1]=optenerTipo();
+                   //System.out.println(contenido);
                 }
                 datosCsvEscribir.add(contenido);
+                //System.out.println(contenido);
                 //escribirEnCsv.writeNext(contenido,true);
+
             }
             contador++;
         }
@@ -123,6 +130,11 @@ public class CSV {
         escribirEnCsv.writeAll(datosCsvEscribir);     
     }
     
-
+    public String optenerTipo(){
+        
+        String[] fichero = rutaCsvLectura.split(Pattern.quote("\\"));
+        String[] ficheroSinExtension = fichero[fichero.length-1].split(Pattern.quote("."));
+        return ficheroSinExtension[0];
+    }
     
 }

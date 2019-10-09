@@ -16,4 +16,6 @@ public interface Vista {
     
     public String getArchivoEscritura();
     
+    public String getArchivoBinario();
+    
 }

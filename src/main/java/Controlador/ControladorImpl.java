@@ -1,6 +1,7 @@
 package Controlador;
 
 import Modelo.CSV;
+import Modelo.DAT;
 import Modelo.Modelo;
 import Vista.Vista;
 import java.io.IOException;
@@ -37,18 +38,17 @@ public class ControladorImpl implements Controlador {
                 modelo.csv.selecionarDatosCsv(vista.getColumnasCsv());
                // modelo.csv.finalizarCsv();
                                 
-             modelo.csv.setRutaCsvLectura(vista.getListaArchivos().get(0));
-                modelo.csv.obtenerDatosCsv(vista.getColumnasCsv());
+                almacenarContenidoCsv(vista.getListaArchivos());
                 modelo.csv.escribirCsv();               
                 modelo.csv.finalizarLecturaCsv();
                 modelo.csv.finalizarEscrituraCsv();
                 
+                DAT archivoDat = new DAT(vista.getArchivoBinario());
+                archivoDat.obtenerContendoresDeCsv(vista.getArchivoEscritura());
+               
                 
-//                csv = new CSV();
-//                  csv.setRutaCsvEscritura(vista.getArchivoEscritura());
-//                  csv.setRutaCsvLectura(vista.getListaArchivos().get(0));
-//                csv.leerCsv();
-//                csv.selecionarDatosCsv(vista.getColumnasCsv());
+                
+
 
             } catch (IOException ex) {
                 Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,9 +71,10 @@ public class ControladorImpl implements Controlador {
         }
     }
     
-    private void almacenarContenidoCsv(ArrayList<String> listaArchivos){
+    private void almacenarContenidoCsv(ArrayList<String> listaArchivos) throws IOException{
         for (int i = 0; i < listaArchivos.size(); i++) {
-            
+                modelo.csv.setRutaCsvLectura(vista.getListaArchivos().get(i));
+                modelo.csv.obtenerDatosCsv(vista.getColumnasCsv());  
         }
         
     }

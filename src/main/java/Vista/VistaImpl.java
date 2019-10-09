@@ -12,6 +12,7 @@ public class VistaImpl implements Vista{
     private ArrayList <String> listaArchivos = new ArrayList<>();
     private String[] columnasCsv;
     private String archivoEscritura;
+    private String archivoBinario;
     
     //Para poder ampliar este proyecto a archivos y urls q el usuario indica bastaria con un bucle que
     //pide al usuario la url y despues la ruta del nuevo archivo de forma que los ira almacenando en los array 
@@ -30,6 +31,7 @@ public class VistaImpl implements Vista{
         this.columnasCsv = new String[]{"CODCALLE", "TEXTO", "CAPACIDAD", "UTM_X", "UTM_Y", "NOTAS", "TIPO"};
         
         archivoEscritura = "src\\main\\java\\datosTratados\\Contenedores.csv";
+        archivoBinario = "src\\main\\java\\datosTratados\\Contenedores.dat";
         
     }
 
@@ -51,6 +53,10 @@ public class VistaImpl implements Vista{
     @Override
     public String getArchivoEscritura() {
         return archivoEscritura;
+    }
+
+    public String getArchivoBinario() {
+        return archivoBinario;
     }
     
 
