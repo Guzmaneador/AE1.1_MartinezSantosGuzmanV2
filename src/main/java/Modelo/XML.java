@@ -7,6 +7,13 @@ import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -32,10 +39,11 @@ public class XML {
     
      public void obtenerContendoresDeCsv(String rutaCsv) throws IOException{
         CSVReader csvReader = new CSVReader(new FileReader(rutaCsv));
+        //csvReader.readAll();
         String[] fila = null;
         while((fila = csvReader.readNext()) != null) {
             Element contenedor = documentoXML.createElement("contendor");
-            contenedor.setAttribute("tipo=", fila[6]);
+            //contenedor.setAttribute("tipo=", fila[6]);
             documentoXML.getDocumentElement().appendChild(contenedor);
             
             //Creamos las etiquetas
@@ -63,18 +71,18 @@ public class XML {
             Element utmY = documentoXML.createElement("utm_Y");
             Text valorUtmY = documentoXML.createTextNode(fila[4]);
             contenedor.appendChild(utmY);
-            utmY.appendChild(valorUtmY);
-            
-            //Introducimos las etiqueta
-            
-            
-            
-            
-            
+            utmY.appendChild(valorUtmY); 
         }
 
             csvReader.close();
     }
+     public void crearXML(String ruta) throws TransformerConfigurationException, TransformerException{
+         Source source = new DOMSource(documentoXML);
+         StreamResult result = new StreamResult(ruta);
+         Transformer transformer = TransformerFactory.newInstance().newTransformer();
+         transformer.transform(source, result);
+         
+     }
     
     
 }

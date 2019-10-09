@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 /**
  *
@@ -51,13 +52,14 @@ public class ControladorImpl implements Controlador {
                 
                 XML xml = new XML();
                 
-                xml.obtenerContendoresDeCsv(vista.getArchivoEscritura());
+               xml.obtenerContendoresDeCsv(vista.getArchivoEscritura());
+               xml.crearXML(vista.getArchivoXML());
                
                 
                 
 
 
-            } catch (IOException | ParserConfigurationException ex) {
+            } catch (IOException | ParserConfigurationException | TransformerException ex) {
                 Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         
