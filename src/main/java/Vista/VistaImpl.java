@@ -13,6 +13,7 @@ public class VistaImpl implements Vista{
     private String[] columnasCsv;
     private String archivoEscritura;
     private String archivoBinario;
+    private String archivoXML;
     
     //Para poder ampliar este proyecto a archivos y urls q el usuario indica bastaria con un bucle que
     //pide al usuario la url y despues la ruta del nuevo archivo de forma que los ira almacenando en los array 
@@ -32,6 +33,7 @@ public class VistaImpl implements Vista{
         
         archivoEscritura = "src\\main\\java\\datosTratados\\Contenedores.csv";
         archivoBinario = "src\\main\\java\\datosTratados\\Contenedores.dat";
+        archivoXML = "src\\main\\java\\datosTratados\\Contenedores.xml";
         
     }
 
@@ -55,11 +57,17 @@ public class VistaImpl implements Vista{
         return archivoEscritura;
     }
 
+    @Override
     public String getArchivoBinario() {
         return archivoBinario;
     }
-    
 
+    @Override
+    public String getArchivoXML() {
+        return archivoXML;
+    }
+    
+    
 
     
     

@@ -18,4 +18,7 @@ public interface Vista {
     
     public String getArchivoBinario();
     
+    public String getArchivoXML();
+    
+    
 }

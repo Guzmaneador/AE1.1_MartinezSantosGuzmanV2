@@ -1,6 +1,7 @@
 package Modelo;
 
 import com.opencsv.CSVReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
@@ -19,6 +20,7 @@ public class XML {
     DocumentBuilder docBuilder;
     DOMImplementation implementation ;
     Document documentoXML;
+    File archivoXml;
 
     public XML() throws ParserConfigurationException {
         docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
