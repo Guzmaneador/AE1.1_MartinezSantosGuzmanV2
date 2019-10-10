@@ -1,6 +1,7 @@
 package Controlador;
 
 import Modelo.CSV;
+import Modelo.Consultas;
 import Modelo.DAT;
 import Modelo.Modelo;
 import Modelo.XML;
@@ -33,14 +34,13 @@ public class ControladorImpl implements Controlador {
             try {
                 pasarUrlAModelo();
                 pasarRutaArchivosAModelor();
+                
                 modelo.descargarFichero("");
                 modelo.csv.setRutaCsvEscritura(vista.getArchivoEscritura());
                 modelo.csv.introducirCamposColumna(vista.getColumnasCsv());
                 modelo.csv.setRutaCsvLectura(vista.getListaArchivos().get(0));
                 modelo.csv.leerCsv();
                 modelo.csv.selecionarDatosCsv(vista.getColumnasCsv());
-               // modelo.csv.finalizarCsv();
-                                
                 almacenarContenidoCsv(vista.getListaArchivos());
                 modelo.csv.escribirCsv();               
                 modelo.csv.finalizarLecturaCsv();
@@ -50,10 +50,12 @@ public class ControladorImpl implements Controlador {
                 archivoDat.obtenerContendoresDeCsv(vista.getArchivoEscritura());
                 System.out.println(archivoDat.readString());
                 
-                XML xml = new XML();
-                
+               XML xml = new XML();       
                xml.obtenerContendoresDeCsv(vista.getArchivoEscritura());
                xml.crearXML(vista.getArchivoXML());
+               
+               Consultas consulta = new Consultas();
+               consulta.consultaCSV(vista.getArchivoEscritura());
                
                 
                 

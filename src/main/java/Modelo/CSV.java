@@ -51,7 +51,7 @@ public class CSV {
 ////////////////////
     public void setRutaCsvEscritura(String rutaCsvEscritura) throws IOException{
         this.rutaCsvEscritura = rutaCsvEscritura ;
-        escribirEnCsv = new CSVWriter(new FileWriter(rutaCsvEscritura, true));
+        escribirEnCsv = new CSVWriter(new FileWriter(rutaCsvEscritura, false));
     }
     
     public void setRutaCsvLectura(String rutaCsvLectura) throws IOException{
@@ -63,7 +63,7 @@ public class CSV {
     }
 /////////////////
     public void introducirCamposColumna(String[] columnasCsv){
-          datosCsvEscribir.add(columnasCsv);
+          //datosCsvEscribir.add(columnasCsv);
 //        escribirEnCsv.writeNext(columnasCsv,true);
 //        System.out.println("hola");
     }
@@ -119,7 +119,7 @@ public class CSV {
                 }
                  System.out.println(contenido[1]);
                 //datosCsvEscribir.add(contenido);
-                escribirEnCsv.writeNext(contenido,true);
+                escribirEnCsv.writeNext(contenido,false);
 
             }
             contador++;
