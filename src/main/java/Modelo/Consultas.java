@@ -1,9 +1,16 @@
 package Modelo;
 
 import com.opencsv.CSVReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -13,6 +20,10 @@ public class Consultas {
     String [] consultas = {"AVDA BENITO PEREZ ARMAS","RAMBLA DE SANTA CRUZ","CALLE MIRAFLORES"};
                             //       carton 8      ||        vidrio  3    ||       envases 2
     CSVReader leerDeCsv;
+    RandomAccessFile leerDeDat;
+    DocumentBuilderFactory factory;
+    DocumentBuilder docBuilder;
+    Document documentoDOM;
     int papelCarton, vidrio,envases;
 
     public Consultas() {
@@ -23,6 +34,7 @@ public class Consultas {
     
     
     public void consultaCSV(String rutaCsv) throws FileNotFoundException, IOException{
+        System.out.println("-------Consulta CSV------------");
         restaurarContadores();
         
         String[] fila = null;
@@ -41,14 +53,49 @@ public class Consultas {
         }
         
     }
-    public void consultaDAT(){
+    public void consultaDAT(String rutaDat) throws FileNotFoundException, IOException{
+        System.out.println("-------Consulta DAT------------");
+        restaurarContadores();
+        int tamañoContenedor =322;
+        int tamañoCampo=46;
+        leerDeDat= new RandomAccessFile(rutaDat,"rw");
+        
+         int puntero;
+        int contador =1;
+        char campo[] = new char[tamañoCampo];
+       // for (String consulta : consultas) {
+            for (int j = 0; j < 10; j++) {
+                
+            
+        
+            puntero = contador * tamañoContenedor;
+            
+            leerDeDat.seek(puntero+tamañoCampo*2);//sumamos al puntero el tamaño de campo por dos ya que seria la segunda posicion donde se escuentra el nombre de la calle
+            for (int i=0; i<tamañoCampo; i++){
+                campo[i]=leerDeDat.readChar();
+                
+            }
+            System.out.println(new String(campo).replace('\0',' '));
+            contador++;
+         //}
+        //return new String(campo).replace('\0',' ');
+        } 
         
     }
     
-    public void consultaXML(){
-
+    public void consultaXML(String rutaXml) throws ParserConfigurationException, SAXException, IOException{
+        xmlDOM(rutaXml);
     }
     
+    
+    public void xmlDOM(String rutaXml) throws ParserConfigurationException, SAXException, IOException{
+        factory = DocumentBuilderFactory.newInstance();
+        docBuilder = factory.newDocumentBuilder();
+        for (String consulta : consultas) {
+            documentoDOM = docBuilder.parse(new File(rutaXml));
+        }
+        
+    }
     
     
     public void contarTipo(String tipo){
