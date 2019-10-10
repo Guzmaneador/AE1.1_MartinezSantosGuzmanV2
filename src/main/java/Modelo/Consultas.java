@@ -53,24 +53,23 @@ public class Consultas {
         }
         
     }
+    
+    //En los ficheros impares hay que 
     public void consultaDAT(String rutaDat) throws FileNotFoundException, IOException{
         System.out.println("-------Consulta DAT------------");
         restaurarContadores();
-        int tamañoContenedor =322;
-        int tamañoCampo=46;
+        int tamañoContenedor =420;
+        int tamañoCampo=60;
         leerDeDat= new RandomAccessFile(rutaDat,"rw");
         
          int puntero;
-        int contador =1;
+        int contador =0;
         char campo[] = new char[tamañoCampo];
        // for (String consulta : consultas) {
-            for (int j = 0; j < 10; j++) {
-                
-            
-        
+            for (int j = 0; j < 1; j++) {
             puntero = contador * tamañoContenedor;
             
-            leerDeDat.seek(puntero+tamañoCampo*2);//sumamos al puntero el tamaño de campo por dos ya que seria la segunda posicion donde se escuentra el nombre de la calle
+            leerDeDat.seek(puntero+(tamañoCampo));//sumamos al puntero el tamaño de campo por dos ya que seria la segunda posicion donde se escuentra el nombre de la calle
             for (int i=0; i<tamañoCampo; i++){
                 campo[i]=leerDeDat.readChar();
                 

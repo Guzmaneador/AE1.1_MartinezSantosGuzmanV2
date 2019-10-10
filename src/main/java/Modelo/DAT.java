@@ -25,8 +25,8 @@ public class DAT {
         this.posicionesContenedor = new ArrayList<>();
         this.ficheroBinario = new File(ruta);
         this.randomBinario = new RandomAccessFile(ficheroBinario,"rw");
-        tamañoContenedor =322;
-        tamañoCampo=46;
+        tamañoContenedor =420;
+        tamañoCampo=60;
 
         
     }
@@ -36,7 +36,9 @@ public class DAT {
         String[] fila = null;
         while((fila = csvReader.readNext()) != null) {
             for (int i = 0; i < fila.length; i++) {
+                //if(i != 5){
                 write(fila[i]);
+               // }
             }
         }
 
@@ -45,7 +47,7 @@ public class DAT {
     
     //ESCRITURA///
     public void write (String datoContendor) throws IOException   {
-             writeString (randomBinario, datoContendor, 46);
+             writeString (randomBinario, datoContendor,tamañoCampo);
       } 
     private void writeString (RandomAccessFile file, String str, int dim)throws IOException { 
         StringBuffer buffer = new StringBuffer();
@@ -78,7 +80,7 @@ public class DAT {
         char campo[] = new char[tamañoContenedor];
         //for (Integer numeroCon : posicionesContenedor) {
             //puntero = numeroCon * tamañoContenedor;
-            puntero = 10 * tamañoContenedor;
+            puntero = 700 * (tamañoContenedor*2);
             randomBinario.seek(puntero);
             for (int i=0; i<tamañoContenedor; i++){
                 campo[i]=randomBinario.readChar();
