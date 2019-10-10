@@ -59,6 +59,7 @@ public class ControladorImpl implements Controlador {
                consulta.consultaCSV(vista.getArchivoEscritura());
                consulta.consultaDAT(vista.getArchivoBinario());
                consulta.consultaXML(vista.getArchivoXML());
+
                
                 
                 

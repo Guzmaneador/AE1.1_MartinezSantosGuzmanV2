@@ -6,6 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -29,7 +32,8 @@ public class Consultas {
     DocumentBuilderFactory factory;
     DocumentBuilder docBuilder;
     Document documentoDOM;
-    XMLReader procesadorXML ;
+    XMLReader procesadorXML ;    
+    List<Contenedor> listaContenedores ;
     
     int papelCarton, vidrio,envases;
 
@@ -59,9 +63,8 @@ public class Consultas {
             leerDeCsv.close();
         }
         
-    }
-    
-    //En los ficheros impares hay que 
+    }  
+ 
     public void consultaDAT(String rutaDat) throws FileNotFoundException, IOException{
         System.out.println("-------Consulta DAT------------");
         restaurarContadores();
@@ -93,8 +96,7 @@ public class Consultas {
         xmlDOM(rutaXml);
         xmlSAX(rutaXml);
     }
-    
-    
+       
     public void xmlDOM(String rutaXml) throws ParserConfigurationException, SAXException, IOException{
         factory = DocumentBuilderFactory.newInstance();
         docBuilder = factory.newDocumentBuilder();
@@ -124,8 +126,25 @@ public class Consultas {
     
     public void xmlSAX(String rutaXml) throws SAXException, IOException{
         procesadorXML = XMLReaderFactory.createXMLReader();
-        ContenedorHandler miContendorHandler = new ContenedorHandler();
+        ContenedorHandler miContenedorHandler = new ContenedorHandler();
+        procesadorXML.setContentHandler(miContenedorHandler);
+        
         procesadorXML.parse(new InputSource(rutaXml));
+        listaContenedores = miContenedorHandler.getListadoContendores();
+        restaurarContadores();
+        
+        System.out.println("-------Consulta DOM-SAX------------");
+        for (String consulta : consultas) {
+            for (Contenedor Contendor : listaContenedores) {         
+                if(Contendor.getTexto().equals(consulta)){
+                    contarTipo(Contendor.getTipo());
+                }
+            }
+            System.out.println("La calle "+consulta+" tiene: "+papelCarton+" contenedores de papel y carton, "
+                    +vidrio+" contenedores de vidiro y "+envases+" contendores de envases");
+            restaurarContadores();
+        }
+        
     }
     public void contarTipo(String tipo){
         if(tipo.equals("Papel_Carton")){
