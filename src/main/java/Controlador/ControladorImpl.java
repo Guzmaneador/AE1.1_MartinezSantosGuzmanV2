@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -57,12 +58,13 @@ public class ControladorImpl implements Controlador {
                Consultas consulta = new Consultas();
                consulta.consultaCSV(vista.getArchivoEscritura());
                consulta.consultaDAT(vista.getArchivoBinario());
+               consulta.consultaXML(vista.getArchivoXML());
                
                 
                 
 
 
-            } catch (IOException | ParserConfigurationException | TransformerException ex) {
+            } catch (IOException | ParserConfigurationException | TransformerException | SAXException ex) {
                 Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         

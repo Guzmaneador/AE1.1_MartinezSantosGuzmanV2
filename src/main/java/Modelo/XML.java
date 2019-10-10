@@ -71,7 +71,12 @@ public class XML {
             Element utmY = documentoXML.createElement("utm_Y");
             Text valorUtmY = documentoXML.createTextNode(fila[4]);
             contenedor.appendChild(utmY);
-            utmY.appendChild(valorUtmY); 
+            utmY.appendChild(valorUtmY);
+            
+            Element tipo = documentoXML.createElement("tipo");
+            Text valorTipo = documentoXML.createTextNode(fila[6]);
+            contenedor.appendChild(tipo);
+            tipo.appendChild(valorTipo); 
         }
 
             csvReader.close();

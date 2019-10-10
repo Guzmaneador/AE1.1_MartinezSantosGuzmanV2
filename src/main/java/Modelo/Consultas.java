@@ -10,7 +10,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.xml.sax.*;
+import org.xml.sax.helpers.XMLReaderFactory;
 
 /**
  *
@@ -24,6 +29,8 @@ public class Consultas {
     DocumentBuilderFactory factory;
     DocumentBuilder docBuilder;
     Document documentoDOM;
+    XMLReader procesadorXML ;
+    
     int papelCarton, vidrio,envases;
 
     public Consultas() {
@@ -66,10 +73,10 @@ public class Consultas {
         int contador =0;
         char campo[] = new char[tamañoCampo];
        // for (String consulta : consultas) {
-            for (int j = 0; j < 1; j++) {
-            puntero = contador * tamañoContenedor;
+            for (int j = 0; j < 10; j++) {
+            puntero = contador * (tamañoContenedor*2);
             
-            leerDeDat.seek(puntero+(tamañoCampo));//sumamos al puntero el tamaño de campo por dos ya que seria la segunda posicion donde se escuentra el nombre de la calle
+            leerDeDat.seek(puntero+(tamañoCampo*2));//sumamos al puntero el tamaño de campo por dos ya que seria la segunda posicion donde se escuentra el nombre de la calle
             for (int i=0; i<tamañoCampo; i++){
                 campo[i]=leerDeDat.readChar();
                 
@@ -84,19 +91,42 @@ public class Consultas {
     
     public void consultaXML(String rutaXml) throws ParserConfigurationException, SAXException, IOException{
         xmlDOM(rutaXml);
+        xmlSAX(rutaXml);
     }
     
     
     public void xmlDOM(String rutaXml) throws ParserConfigurationException, SAXException, IOException{
         factory = DocumentBuilderFactory.newInstance();
         docBuilder = factory.newDocumentBuilder();
+        restaurarContadores();
+        
+        System.out.println("-------Consulta DOM-XML------------");
         for (String consulta : consultas) {
             documentoDOM = docBuilder.parse(new File(rutaXml));
-        }
+            
+            NodeList listaContendorNode =documentoDOM.getElementsByTagName("contendor");
+            //obtnemos el numero de contendores y creamos un bucleo q los recorra todos
+            for (int i = 0; i <listaContendorNode.getLength(); i++) {
+                Node contendorNode = listaContendorNode.item(i);
+                if(contendorNode.getNodeType() == Node.ELEMENT_NODE){
+                    Element contendorElement = (Element) contendorNode;
+                    if(contendorElement.getElementsByTagName("nombreCalle").item(0).getTextContent().equals(consulta)){
+                        contarTipo(contendorElement.getElementsByTagName("tipo").item(0).getTextContent());
+                    }
+                }
+            }
+            System.out.println("La calle "+consulta+" tiene: "+papelCarton+" contenedores de papel y carton, "
+            +vidrio+" contenedores de vidiro y "+envases+" contendores de envases");
+            restaurarContadores();
+        }//fin cunsulta
         
     }
     
-    
+    public void xmlSAX(String rutaXml) throws SAXException, IOException{
+        procesadorXML = XMLReaderFactory.createXMLReader();
+        ContenedorHandler miContendorHandler = new ContenedorHandler();
+        procesadorXML.parse(new InputSource(rutaXml));
+    }
     public void contarTipo(String tipo){
         if(tipo.equals("Papel_Carton")){
             papelCarton++;    
