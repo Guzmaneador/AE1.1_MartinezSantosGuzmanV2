@@ -39,7 +39,8 @@ public class FicheroDat extends Fichero{
         String calle =" ";
         String tipo =" ";
          
-          while((!calle.equals("CALLE DONIS")) || (!tipo.equals("Envases"))){
+//          while((!calle.equals("CALLE DONIS")) || (!tipo.equals("Envases"))){
+          while(contador != 4902){
                
 
             puntero = contador * (tamañoContenedor*2);
@@ -67,7 +68,8 @@ public class FicheroDat extends Fichero{
             contador++;
          }
             System.out.println("La calle "+consulta+" tiene: "+papelCarton+" contenedores de papel y carton, "
-            +vidrio+" contenedores de vidiro y "+envases+" contendores de envases");
+                    +vidrio+" contenedores de vidiro , "+envases+" contendores de envases"
+                    + ", "+electricos+" contendores de Electricos y "+solidos+" contendores de solidos");
             restaurarContadores();
 
         //return new String(campo).replace('\0',' ');

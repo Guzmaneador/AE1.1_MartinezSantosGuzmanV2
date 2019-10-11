@@ -33,7 +33,8 @@ public class FicheroCSV extends Fichero{
                 }
             }
             System.out.println("La calle "+consulta+" tiene: "+papelCarton+" contenedores de papel y carton, "
-                    +vidrio+" contenedores de vidiro y "+envases+" contendores de envases");
+                    +vidrio+" contenedores de vidiro , "+envases+" contendores de envases"
+                            + ", "+electricos+" contendores de Electricos y "+solidos+" contendores de solidos");
             restaurarContadores();
             leerDeCsv.close();
         }

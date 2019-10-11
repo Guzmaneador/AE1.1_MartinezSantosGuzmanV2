@@ -53,7 +53,8 @@ public class FicheroXML extends Fichero {
                 }
             }
             System.out.println("La calle "+consulta+" tiene: "+papelCarton+" contenedores de papel y carton, "
-            +vidrio+" contenedores de vidiro y "+envases+" contendores de envases");
+                    +vidrio+" contenedores de vidiro , "+envases+" contendores de envases"
+                    + ", "+electricos+" contendores de Electricos y "+solidos+" contendores de solidos");
             restaurarContadores();
         }//fin cunsulta
         System.out.println(tiempo.stop(System.currentTimeMillis()));
@@ -81,7 +82,8 @@ public class FicheroXML extends Fichero {
                 }
             }
             System.out.println("La calle "+consulta+" tiene: "+papelCarton+" contenedores de papel y carton, "
-                    +vidrio+" contenedores de vidiro y "+envases+" contendores de envases");
+                    +vidrio+" contenedores de vidiro , "+envases+" contendores de envases"
+                    + ", "+electricos+" contendores de Electricos y "+solidos+" contendores de solidos");
             restaurarContadores();
         }
         System.out.println(tiempo.stop(System.currentTimeMillis()));
