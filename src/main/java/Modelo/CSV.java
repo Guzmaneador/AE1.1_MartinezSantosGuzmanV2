@@ -88,7 +88,9 @@ public class CSV {
             }//2ºFor 
         }//1ºFor
         for (int i = 0; i < posicionColumna.length; i++) {
-            System.out.println(posicionColumna[i]);
+
+
+
             
         }
     }
@@ -121,6 +123,8 @@ public class CSV {
                 //datosCsvEscribir.add(contenido);
                 escribirEnCsv.writeNext(contenido,false);
 
+            }else{
+                escribirEnCsv.writeNext(columnasCsv,false);
             }
             contador++;
         }
@@ -137,5 +141,6 @@ public class CSV {
         String[] ficheroSinExtension = fichero[fichero.length-1].split(Pattern.quote("."));
         return ficheroSinExtension[0];
     }
+    
     
 }

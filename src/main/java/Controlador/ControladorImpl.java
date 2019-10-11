@@ -49,7 +49,7 @@ public class ControladorImpl implements Controlador {
                 
                 DAT archivoDat = new DAT(vista.getArchivoBinario());
                 archivoDat.obtenerContendoresDeCsv(vista.getArchivoEscritura());
-                System.out.println(archivoDat.readString());
+                //System.out.println(archivoDat.readString());
                 
                XML xml = new XML();       
                xml.obtenerContendoresDeCsv(vista.getArchivoEscritura());
@@ -59,6 +59,7 @@ public class ControladorImpl implements Controlador {
                consulta.consultaCSV(vista.getArchivoEscritura());
                consulta.consultaDAT(vista.getArchivoBinario());
                consulta.consultaXML(vista.getArchivoXML());
+               consulta.extraerConsulta(vista.getArchivoEscritura(), 5);
 
                
                 

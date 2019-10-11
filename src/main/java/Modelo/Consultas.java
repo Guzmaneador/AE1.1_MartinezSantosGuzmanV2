@@ -9,6 +9,7 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -25,8 +26,10 @@ import org.xml.sax.helpers.XMLReaderFactory;
  * @author Vulture
  */
 public class Consultas {
+    ArrayList<String> listaConsultas = new ArrayList<>(); 
     String [] consultas = {"AVDA BENITO PEREZ ARMAS","RAMBLA DE SANTA CRUZ","CALLE MIRAFLORES"};
                             //       carton 8      ||        vidrio  3    ||       envases 2
+    Random aleatorio = new Random();
     CSVReader leerDeCsv;
     RandomAccessFile leerDeDat;
     DocumentBuilderFactory factory;
@@ -36,6 +39,7 @@ public class Consultas {
     List<Contenedor> listaContenedores ;
     
     int papelCarton, vidrio,envases;
+    TiempoDeEjecucion tiempo = new TiempoDeEjecucion();
 
     public Consultas() {
         this.papelCarton = 0;
@@ -46,10 +50,11 @@ public class Consultas {
     
     public void consultaCSV(String rutaCsv) throws FileNotFoundException, IOException{
         System.out.println("-------Consulta CSV------------");
+        tiempo.start(System.currentTimeMillis());
         restaurarContadores();
         
         String[] fila = null;
-        int contador=0;
+        
         for (String consulta : consultas) {
             leerDeCsv = new CSVReader(new FileReader(rutaCsv));
             while ((fila = leerDeCsv.readNext()) != null) {
@@ -62,14 +67,20 @@ public class Consultas {
             restaurarContadores();
             leerDeCsv.close();
         }
+        System.out.println(tiempo.stop(System.currentTimeMillis()));
         
     }  
+    
     public void consultaDAT(String rutaDat) throws IOException{
         System.out.println("-------Consulta DAT------------");
+        tiempo.start(System.currentTimeMillis());
         for (String consulta : consultas) {
             examinarDAT(rutaDat,consulta);
         }
+        System.out.println(tiempo.stop(System.currentTimeMillis()));
+        leerDeDat.close();
     }
+    
     public void examinarDAT(String rutaDat,String consulta) throws FileNotFoundException, IOException{
 
         restaurarContadores();
@@ -77,7 +88,7 @@ public class Consultas {
         int tamañoCampo=60;
         leerDeDat= new RandomAccessFile(rutaDat,"rw");
         
-         int puntero=0;
+        int puntero=0;
         int contador =0;
         char campo[] = new char[tamañoCampo];
         char campo2[] = new char[tamañoContenedor];
@@ -140,6 +151,8 @@ public class Consultas {
         restaurarContadores();
         
         System.out.println("-------Consulta DOM-XML------------");
+        tiempo.start(System.currentTimeMillis());
+
         for (String consulta : consultas) {
             documentoDOM = docBuilder.parse(new File(rutaXml));
             
@@ -158,6 +171,8 @@ public class Consultas {
             +vidrio+" contenedores de vidiro y "+envases+" contendores de envases");
             restaurarContadores();
         }//fin cunsulta
+        System.out.println(tiempo.stop(System.currentTimeMillis()));
+
         
     }
     
@@ -171,6 +186,8 @@ public class Consultas {
         restaurarContadores();
         
         System.out.println("-------Consulta DOM-SAX------------");
+        tiempo.start(System.currentTimeMillis());
+
         for (String consulta : consultas) {
             for (Contenedor Contendor : listaContenedores) {         
                 if(Contendor.getTexto().equals(consulta)){
@@ -181,8 +198,11 @@ public class Consultas {
                     +vidrio+" contenedores de vidiro y "+envases+" contendores de envases");
             restaurarContadores();
         }
+        System.out.println(tiempo.stop(System.currentTimeMillis()));
+
         
     }
+    
     public void contarTipo(String tipo){
         if(tipo.equals("Papel_Carton")){
             papelCarton++;    
@@ -200,6 +220,34 @@ public class Consultas {
         papelCarton=0;
         vidrio=0;
         envases=0;
+        
+    }
+    public void extraerConsulta(String rutaCsv,int numeroConsultas) throws IOException {
+            System.out.println("------Consultas-----");
+                for (int i = 0; i < numeroConsultas; i++) {
+                    obtenerConsulta(rutaCsv);
+                }
+    }
+    public void obtenerConsulta(String rutaCsv) throws FileNotFoundException, IOException{
+        //DAT miDat= new DAT(rutaDat);
+        
+        
+        String consulta;
+        int contador=0;
+        String[] fila = null;
+        
+            int poscion = aleatorio.nextInt(1142)+2;
+           // fila = null;
+        
+         leerDeCsv = new CSVReader(new FileReader(rutaCsv));
+            while ((fila = leerDeCsv.readNext()) != null) {
+                if (poscion==contador) {
+                    System.out.println(fila[1]);
+                    break;
+                }
+                contador++;
+            }
+            leerDeCsv.close();
         
     }
 }

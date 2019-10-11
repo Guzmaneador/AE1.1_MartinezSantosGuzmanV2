@@ -58,29 +58,13 @@ public class DAT {
     } 
     //LECTURA//
 
-//    public String readString () throws IOException {
-//        int puntero;
-//        int contador =0;
-//        char campo[] = new char[tamañoCampo];
-//        //for (Integer numeroCon : posicionesContenedor) {
-//                listaContenedores.add(new Contenedor());
-//            //puntero = numeroCon * tamañoContenedor;
-//            puntero = 10 * tamañoContenedor;
-//            randomBinario.seek(puntero+tamañoCampo);
-//            for (int i=0; i<tamañoContenedor; i++){
-//                campo[i]=randomBinario.readChar();
-//                
-//            }
-//            contador++;
-//         //}
-//        return new String(campo).replace('\0',' ');
-//    }
-    public String readString () throws IOException {
+
+    public String readString (int posicion) throws IOException {
         int puntero;
         char campo[] = new char[tamañoContenedor];
         //for (Integer numeroCon : posicionesContenedor) {
             //puntero = numeroCon * tamañoContenedor;
-            puntero = 700 * (tamañoContenedor*2);
+            puntero = posicion * (tamañoContenedor*2);
             randomBinario.seek(puntero);
             for (int i=0; i<tamañoContenedor; i++){
                 campo[i]=randomBinario.readChar();
