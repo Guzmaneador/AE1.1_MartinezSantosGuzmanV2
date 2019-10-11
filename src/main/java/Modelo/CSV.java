@@ -117,7 +117,7 @@ public class CSV {
                    contenido[contenido.length-1]=optenerTipo();
                    //System.out.println(contenido[i]);
                 }
-                 System.out.println(contenido[1]);
+                 //System.out.println(contenido[1]);
                 //datosCsvEscribir.add(contenido);
                 escribirEnCsv.writeNext(contenido,false);
 
