@@ -7,13 +7,11 @@ package Modelo;
 public class TiempoDeEjecucion {
         long inicio;// = System.currentTimeMillis();
          
-        //Thread.sleep(2000);
          
         long fin;
          
         double tiempoTotal;
          
-        //System.out.println(tiempo +" segundos");
         
         public void start(long tiempo){
             inicio = tiempo;

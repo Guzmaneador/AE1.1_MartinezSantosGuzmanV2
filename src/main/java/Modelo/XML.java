@@ -39,11 +39,10 @@ public class XML {
     
      public void obtenerContendoresDeCsv(String rutaCsv) throws IOException{
         CSVReader csvReader = new CSVReader(new FileReader(rutaCsv));
-        //csvReader.readAll();
+
         String[] fila = null;
         while((fila = csvReader.readNext()) != null) {
             Element contenedor = documentoXML.createElement("contendor");
-            //contenedor.setAttribute("tipo=", fila[6]);
             documentoXML.getDocumentElement().appendChild(contenedor);
             
             //Creamos las etiquetas

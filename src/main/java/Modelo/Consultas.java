@@ -96,14 +96,9 @@ public class Consultas {
         String calle =" ";
         String tipo =" ";
          
-//        for (int j = 0; j < consultas.length; j++) {
-//           calle =" ";
-//            tipo =" ";
-          //while(puntero < leerDeDat.length()){
           while((!calle.equals("CALLE DONIS")) || (!tipo.equals("Envases"))){
                
-          // }
-           // for (int j = 0; j < 10; j++) {
+
             puntero = contador * (tamañoContenedor*2);
             
             leerDeDat.seek(puntero+(tamañoCampo*2));//sumamos al puntero el tamaño de campo por dos ya que seria la segunda posicion donde se escuentra el nombre de la calle
@@ -111,7 +106,7 @@ public class Consultas {
                 campo[i]=leerDeDat.readChar();      
             }
             String[] soloCalle= new String(campo).replace('\0','1').split("1");
-                //System.out.println(soloCalle[0]);
+
                 calle=soloCalle[0];
             ////////////////////////
             puntero = contador * (tamañoContenedor*2);
@@ -120,15 +115,12 @@ public class Consultas {
                 campo2[i]=leerDeDat.readChar();      
             }
             String[] soloTexto= new String(campo2).replace('\0','1').split("1");
-                //System.out.println(soloTexto[soloTexto.length-1]);
+
                 tipo=soloTexto[soloTexto.length-1];
                 
                 if(calle.equals(consulta)){
                     contarTipo(tipo);
                 }
-                
-               
-            //System.out.println(new String(campo).replace('\0','1'));
             contador++;
          }
             System.out.println("La calle "+consulta+" tiene: "+papelCarton+" contenedores de papel y carton, "
@@ -229,20 +221,18 @@ public class Consultas {
                 }
     }
     public void obtenerConsulta(String rutaCsv) throws FileNotFoundException, IOException{
-        //DAT miDat= new DAT(rutaDat);
-        
-        
-        String consulta;
+
+               
         int contador=0;
         String[] fila = null;
         
             int poscion = aleatorio.nextInt(1142)+2;
-           // fila = null;
         
          leerDeCsv = new CSVReader(new FileReader(rutaCsv));
             while ((fila = leerDeCsv.readNext()) != null) {
                 if (poscion==contador) {
                     System.out.println(fila[1]);
+                    listaConsultas.add(fila[1]);
                     break;
                 }
                 contador++;

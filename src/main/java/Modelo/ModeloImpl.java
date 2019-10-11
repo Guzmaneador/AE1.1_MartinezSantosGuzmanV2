@@ -19,7 +19,7 @@ public class ModeloImpl implements Modelo{
 
 
     
-    //nuevo
+  
     ArrayList <File> listaFicheros;
     ArrayList <URLConnection> conexionesUrl;
     InputStream miInputStram;

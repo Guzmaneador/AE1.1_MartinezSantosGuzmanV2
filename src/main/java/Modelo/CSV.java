@@ -117,10 +117,9 @@ public class CSV {
                 for (int i = 0; i < posicionColumna.length; i++) {
                     contenido[i] = fila[posicionColumna[i]];
                    contenido[contenido.length-1]=optenerTipo();
-                   //System.out.println(contenido[i]);
+  
                 }
-                 //System.out.println(contenido[1]);
-                //datosCsvEscribir.add(contenido);
+
                 escribirEnCsv.writeNext(contenido,false);
 
             }else{

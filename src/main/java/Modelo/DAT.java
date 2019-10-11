@@ -36,16 +36,16 @@ public class DAT {
         String[] fila = null;
         while((fila = csvReader.readNext()) != null) {
             for (int i = 0; i < fila.length; i++) {
-                //if(i != 5){
+             
                 write(fila[i]);
-               // }
+             
             }
         }
 
             csvReader.close();
     }
     
-    //ESCRITURA///
+
     public void write (String datoContendor) throws IOException   {
              writeString (randomBinario, datoContendor,tamañoCampo);
       } 
@@ -56,20 +56,19 @@ public class DAT {
         buffer.setLength(dim);
         file.writeChars(buffer.toString());
     } 
-    //LECTURA//
+
 
 
     public String readString (int posicion) throws IOException {
         int puntero;
         char campo[] = new char[tamañoContenedor];
-        //for (Integer numeroCon : posicionesContenedor) {
-            //puntero = numeroCon * tamañoContenedor;
+
             puntero = posicion * (tamañoContenedor*2);
             randomBinario.seek(puntero);
             for (int i=0; i<tamañoContenedor; i++){
                 campo[i]=randomBinario.readChar();
             }              
-         //}
+     
         return new String(campo).replace('\0',' ');
     }
 }
