@@ -1,13 +1,17 @@
 package Modelo;
 
+import com.opencsv.CSVReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +28,9 @@ public class ModeloImpl implements Modelo{
     ArrayList <URLConnection> conexionesUrl;
     InputStream miInputStram;
     FileOutputStream miFileOutputStream;
+        Random aleatorio = new Random();
+        ArrayList<String> listaConsultas = new ArrayList<>(); 
+        CSVReader leerDeCsv;
 
     File directorioDescargas=new File("src\\main\\java\\datosDescargados");
     File directorioDatosTratados=new File("src\\main\\java\\datosTratados");
@@ -79,6 +86,39 @@ public class ModeloImpl implements Modelo{
         }
     }
 
-   
+    @Override
+    public void extraerConsulta(String rutaCsv,int numeroConsultas) throws IOException {
+            System.out.println("------Consultas-----");
+                for (int i = 0; i < numeroConsultas; i++) {
+                    obtenerConsulta(rutaCsv);
+                }
+    }
+       
+    public void obtenerConsulta(String rutaCsv) throws FileNotFoundException, IOException{
+
+               
+        int contador=0;
+        String[] fila = null;
+        
+            int poscion = aleatorio.nextInt(1142)+2;
+        
+         leerDeCsv = new CSVReader(new FileReader(rutaCsv));
+            while ((fila = leerDeCsv.readNext()) != null) {
+                if (poscion==contador) {
+                    System.out.println(fila[1]);
+                    listaConsultas.add(fila[1]);
+                    break;
+                }
+                contador++;
+            }
+            leerDeCsv.close();
+        
+    }
+
+    public ArrayList<String> getListaConsultas() {
+        return listaConsultas;
+    }
+
+
    
 }

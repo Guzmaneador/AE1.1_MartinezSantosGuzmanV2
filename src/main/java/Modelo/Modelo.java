@@ -2,6 +2,7 @@ package Modelo;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,4 +22,8 @@ public interface Modelo {
      public void conectarUrl(String url) throws MalformedURLException, IOException;
      
      public void descargarFichero(String rutaDescarga) throws IOException;
+     
+     public void extraerConsulta(String rutaCsv,int numeroConsultas) throws IOException;
+     
+     public ArrayList<String> getListaConsultas();
 }

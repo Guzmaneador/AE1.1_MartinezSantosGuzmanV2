@@ -51,8 +51,7 @@ public class Fichero {
     public void consultaCSV(String rutaCsv)throws FileNotFoundException, IOException{ 
      }
     
-    public void consultaXML(String rutaXml) throws ParserConfigurationException, SAXException, IOException{
-     }
+
     
     public void xmlDOM(String rutaXml) throws ParserConfigurationException, SAXException, IOException{
      }
@@ -89,32 +88,5 @@ public class Fichero {
         envases=0;
         
     }
-    
-    public void extraerConsulta(String rutaCsv,int numeroConsultas) throws IOException {
-            System.out.println("------Consultas-----");
-                for (int i = 0; i < numeroConsultas; i++) {
-                    obtenerConsulta(rutaCsv);
-                }
-    }
-    
-    public void obtenerConsulta(String rutaCsv) throws FileNotFoundException, IOException{
-
-               
-        int contador=0;
-        String[] fila = null;
-        
-            int poscion = aleatorio.nextInt(1142)+2;
-        
-         leerDeCsv = new CSVReader(new FileReader(rutaCsv));
-            while ((fila = leerDeCsv.readNext()) != null) {
-                if (poscion==contador) {
-                    System.out.println(fila[1]);
-                    listaConsultas.add(fila[1]);
-                    break;
-                }
-                contador++;
-            }
-            leerDeCsv.close();
-        
-    }
+  
 }

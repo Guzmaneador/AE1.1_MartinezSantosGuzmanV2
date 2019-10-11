@@ -23,11 +23,6 @@ import org.xml.sax.helpers.XMLReaderFactory;
  * @author 2dama
  */
 public class FicheroXML extends Fichero {
-      @Override
-      public void consultaXML(String rutaXml) throws ParserConfigurationException, SAXException, IOException{
-        xmlDOM(rutaXml);
-        xmlSAX(rutaXml);
-    }
        
       @Override
     public void xmlDOM(String rutaXml) throws ParserConfigurationException, SAXException, IOException{
@@ -70,9 +65,10 @@ public class FicheroXML extends Fichero {
         
         procesadorXML.parse(new InputSource(rutaXml));
         listaContenedores = miContenedorHandler.getListadoContendores();
-        restaurarContadores();
         
         System.out.println("-------Consulta DOM-SAX------------");
+        restaurarContadores();
+
         tiempo.start(System.currentTimeMillis());
 
         for (String consulta : consultas) {
