@@ -1,8 +1,11 @@
 package Controlador;
 
 import Modelo.CSV;
-import Modelo.Consultas;
+import Modelo.Fichero;
 import Modelo.DAT;
+import Modelo.FicheroCSV;
+import Modelo.FicheroDat;
+import Modelo.FicheroXML;
 import Modelo.Modelo;
 import Modelo.XML;
 import Vista.Vista;
@@ -55,10 +58,13 @@ public class ControladorImpl implements Controlador {
                xml.obtenerContendoresDeCsv(vista.getArchivoEscritura());
                xml.crearXML(vista.getArchivoXML());
                
-               Consultas consulta = new Consultas();
-               consulta.consultaCSV(vista.getArchivoEscritura());
-               consulta.consultaDAT(vista.getArchivoBinario());
-               consulta.consultaXML(vista.getArchivoXML());
+               Fichero consulta = new Fichero();
+               Fichero consultacsv = new FicheroCSV();
+               Fichero consultaxml = new FicheroXML();
+               Fichero consultadat = new FicheroDat();
+               consultacsv.consultaCSV(vista.getArchivoEscritura());
+               consultadat.consultaDAT(vista.getArchivoBinario());
+               consultaxml.consultaXML(vista.getArchivoXML());
                consulta.extraerConsulta(vista.getArchivoEscritura(), 5);
 
                
