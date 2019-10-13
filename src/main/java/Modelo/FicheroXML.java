@@ -72,11 +72,9 @@ public class FicheroXML extends Fichero {
         tiempo.start(System.currentTimeMillis());
 
         for (String consulta : consultas) {
-            for (Contenedor Contendor : listaContenedores) {         
-                if(Contendor.getTexto().equals(consulta)){
-                    contarTipo(Contendor.getTipo());
-                }
-            }
+            listaContenedores.stream().filter((Contendor) -> (Contendor.getTexto().equals(consulta))).forEachOrdered((Contendor) -> {
+                contarTipo(Contendor.getTipo());
+            });
             System.out.println("La calle "+consulta+" tiene: "+papelCarton+" contenedores de papel y carton, "
                     +vidrio+" contenedores de vidiro , "+envases+" contendores de envases"
                     + ", "+electricos+" contendores de Electricos y "+solidos+" contendores de solidos");

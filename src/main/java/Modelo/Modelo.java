@@ -1,8 +1,12 @@
 package Modelo;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -10,10 +14,7 @@ import java.util.ArrayList;
  */
 public interface Modelo {
 
-    /**
-     *
-     */
-     public  CSV csv  =new CSV();
+
     
      public void introducirFicheroEnLista(String nombre);
      
@@ -28,4 +29,12 @@ public interface Modelo {
      public ArrayList<String> getListaConsultas();
      
      public void setRutas(String rutaCsv,String rutaDat,String rutaXml);
+     
+     public void trabajarFicheroCsv(String[] columnasCsv,ArrayList<String> listaArchivos) throws IOException;
+     
+     public void trabajarFicheroDat() throws FileNotFoundException, IOException;
+     
+     public void trabajarFicheroXml() throws ParserConfigurationException, IOException, TransformerException;
+     
+     public void RealizarConsultas() throws IOException, SAXException, ParserConfigurationException;
 }

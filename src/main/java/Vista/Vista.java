@@ -14,7 +14,7 @@ public interface Vista {
     
     public String[] getColumnasCsv();
     
-    public String getArchivoEscritura();
+    public String getRutaArchivoCsv();
     
     public String getArchivoBinario();
     

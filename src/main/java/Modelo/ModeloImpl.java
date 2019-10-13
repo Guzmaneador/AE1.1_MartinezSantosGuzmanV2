@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -50,8 +53,12 @@ public class ModeloImpl implements Modelo{
     
     
     @Override
-    public void conectarUrl(String url) throws MalformedURLException, IOException{
+    public void conectarUrl(String url) throws  IOException{
+        try{
         conexionesUrl.add((new URL (url)).openConnection());
+        }catch(MalformedURLException e){
+            
+        }
     }
     
     @Override
@@ -87,6 +94,55 @@ public class ModeloImpl implements Modelo{
         }
     }
 
+
+
+    @Override
+    public ArrayList<String> getListaConsultas() {
+        return listaConsultas;
+    }
+    
+    @Override
+    public void setRutas(String rutaCsv,String rutaDat,String rutaXml){
+        this.rutaCsv=rutaCsv;
+        this.rutaDat=rutaDat;
+        this.rutaXml=rutaXml;
+    }
+
+    @Override
+    public void trabajarFicheroCsv(String[] columnasCsv,ArrayList<String> listaArchivos) throws IOException{
+                csv.setRutaCsvEscritura(rutaCsv);
+                csv.introducirCamposColumna(columnasCsv);
+                csv.setRutaCsvLectura(listaArchivos.get(0));
+                csv.leerCsv();
+                csv.selecionarDatosCsv(columnasCsv);
+                almacenarContenidoCsv(columnasCsv,listaArchivos);
+                csv.escribirCsv();               
+                csv.finalizarLecturaCsv();
+                csv.finalizarEscrituraCsv();
+        
+    }
+    
+    private void almacenarContenidoCsv(String[] columnasCsv,ArrayList<String> listaArchivos) throws IOException{
+        for (int i = 0; i < listaArchivos.size(); i++) {
+                csv.setRutaCsvLectura(listaArchivos.get(i));
+                csv.obtenerDatosCsv(columnasCsv);  
+        }
+        
+    }
+
+    @Override
+    public void trabajarFicheroDat() throws FileNotFoundException, IOException{
+        DAT archivoDat = new DAT(rutaDat);
+        archivoDat.obtenerContendoresDeCsv(rutaCsv);
+    }
+    
+    @Override
+    public void trabajarFicheroXml() throws ParserConfigurationException, IOException, TransformerException{
+        XML xml = new XML();       
+        xml.obtenerContendoresDeCsv(rutaCsv);
+        xml.crearXML(rutaXml);
+    }
+    
     @Override
     public void extraerConsulta(String rutaCsv,int numeroConsultas) throws IOException {
             System.out.println("------Consultas-----");
@@ -115,37 +171,21 @@ public class ModeloImpl implements Modelo{
             leerDeCsv.close();
         
     }
-
-    public ArrayList<String> getListaConsultas() {
-        return listaConsultas;
-    }
-    
-    @Override
-    public void setRutas(String rutaCsv,String rutaDat,String rutaXml){
-        this.rutaCsv=rutaCsv;
-        this.rutaDat=rutaDat;
-        this.rutaXml=rutaXml;
-    }
-
-    public void trabajarFicheroCsv(String[] columnasCsv,ArrayList<String> listaArchivos) throws IOException{
-                csv.setRutaCsvEscritura(rutaCsv);
-                csv.introducirCamposColumna(columnasCsv);
-                csv.setRutaCsvLectura(listaArchivos.get(0));
-                csv.leerCsv();
-                csv.selecionarDatosCsv(columnasCsv);
-                almacenarContenidoCsv(columnasCsv,listaArchivos);
-                csv.escribirCsv();               
-                csv.finalizarLecturaCsv();
-                csv.finalizarEscrituraCsv();
-        
-    }
-        private void almacenarContenidoCsv(String[] columnasCsv,ArrayList<String> listaArchivos) throws IOException{
-        for (int i = 0; i < listaArchivos.size(); i++) {
-                csv.setRutaCsvLectura(listaArchivos.get(i));
-                csv.obtenerDatosCsv(columnasCsv);  
-        }
-        
-    }
-
    
+    @Override
+    public void RealizarConsultas() throws IOException, SAXException, ParserConfigurationException{
+               Fichero consultacsv = new FicheroCSV();
+               consultacsv.consultaCSV(rutaCsv);
+               
+               Fichero consultadat = new FicheroDat();
+               consultadat.consultaDAT(rutaDat);
+
+               Fichero consultaXmlDom = new FicheroXML();
+               consultaXmlDom.xmlDOM(rutaXml);
+
+               
+               Fichero consultaXmlSax = new FicheroXML();
+               consultaXmlSax.xmlSAX(rutaXml);
+        
+    }
 }

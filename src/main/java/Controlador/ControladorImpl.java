@@ -39,44 +39,12 @@ public class ControladorImpl implements Controlador {
                 pasarUrlAModelo();
                 pasarRutaArchivosAModelor();               
                 modelo.descargarFichero("");
-                modelo.setRutas(vista.getArchivoEscritura(),vista.getArchivoBinario(),vista.getArchivoXML());
-                
-                
-                modelo.csv.setRutaCsvEscritura(vista.getArchivoEscritura());
-                modelo.csv.introducirCamposColumna(vista.getColumnasCsv());
-                modelo.csv.setRutaCsvLectura(vista.getListaArchivos().get(0));
-                modelo.csv.leerCsv();
-                modelo.csv.selecionarDatosCsv(vista.getColumnasCsv());
-                almacenarContenidoCsv(vista.getListaArchivos());
-                modelo.csv.escribirCsv();               
-                modelo.csv.finalizarLecturaCsv();
-                modelo.csv.finalizarEscrituraCsv();
-                
-                DAT archivoDat = new DAT(vista.getArchivoBinario());
-                archivoDat.obtenerContendoresDeCsv(vista.getArchivoEscritura());
-                //System.out.println(archivoDat.readString());
-                
-               XML xml = new XML();       
-               xml.obtenerContendoresDeCsv(vista.getArchivoEscritura());
-               xml.crearXML(vista.getArchivoXML());
-               
-               modelo.extraerConsulta(vista.getArchivoEscritura(), 10);
-               
-               Fichero consulta = new Fichero();
-               Fichero consultacsv = new FicheroCSV();
-               Fichero consultaxml = new FicheroXML();
-               Fichero consultaxml2 = new FicheroXML();
-               Fichero consultadat = new FicheroDat();
-               consultacsv.consultaCSV(vista.getArchivoEscritura());
-               consultadat.consultaDAT(vista.getArchivoBinario());
-               consultaxml.xmlDOM(vista.getArchivoXML());
-               consultaxml2.xmlSAX(vista.getArchivoXML());
-
-               
-                
-                
-
-
+                modelo.setRutas(vista.getRutaArchivoCsv(),vista.getArchivoBinario(),vista.getArchivoXML());
+                modelo.trabajarFicheroCsv(vista.getColumnasCsv(), vista.getListaArchivos());
+                modelo.trabajarFicheroDat();
+                modelo.trabajarFicheroXml();
+                modelo.extraerConsulta(vista.getRutaArchivoCsv(), 10);
+                modelo.RealizarConsultas();
             } catch (IOException | ParserConfigurationException | TransformerException | SAXException ex) {
                 Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -98,12 +66,8 @@ public class ControladorImpl implements Controlador {
         }
     }
     
-    private void almacenarContenidoCsv(ArrayList<String> listaArchivos) throws IOException{
-        for (int i = 0; i < listaArchivos.size(); i++) {
-                modelo.csv.setRutaCsvLectura(vista.getListaArchivos().get(i));
-                modelo.csv.obtenerDatosCsv(vista.getColumnasCsv());  
-        }
+
         
-    }
+    
     
 }
