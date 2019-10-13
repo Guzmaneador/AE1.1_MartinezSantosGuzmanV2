@@ -35,7 +35,8 @@ public class ModeloImpl implements Modelo{
     File directorioDescargas=new File("src\\main\\java\\datosDescargados");
     File directorioDatosTratados=new File("src\\main\\java\\datosTratados");
     
-        public CSV csv ;
+    public CSV csv ;
+    private String rutaCsv, rutaDat, rutaXml;
    
 
     public ModeloImpl() {
@@ -118,7 +119,33 @@ public class ModeloImpl implements Modelo{
     public ArrayList<String> getListaConsultas() {
         return listaConsultas;
     }
+    
+    @Override
+    public void setRutas(String rutaCsv,String rutaDat,String rutaXml){
+        this.rutaCsv=rutaCsv;
+        this.rutaDat=rutaDat;
+        this.rutaXml=rutaXml;
+    }
 
+    public void trabajarFicheroCsv(String[] columnasCsv,ArrayList<String> listaArchivos) throws IOException{
+                csv.setRutaCsvEscritura(rutaCsv);
+                csv.introducirCamposColumna(columnasCsv);
+                csv.setRutaCsvLectura(listaArchivos.get(0));
+                csv.leerCsv();
+                csv.selecionarDatosCsv(columnasCsv);
+                almacenarContenidoCsv(columnasCsv,listaArchivos);
+                csv.escribirCsv();               
+                csv.finalizarLecturaCsv();
+                csv.finalizarEscrituraCsv();
+        
+    }
+        private void almacenarContenidoCsv(String[] columnasCsv,ArrayList<String> listaArchivos) throws IOException{
+        for (int i = 0; i < listaArchivos.size(); i++) {
+                csv.setRutaCsvLectura(listaArchivos.get(i));
+                csv.obtenerDatosCsv(columnasCsv);  
+        }
+        
+    }
 
    
 }

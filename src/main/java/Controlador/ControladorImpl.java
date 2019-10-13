@@ -37,9 +37,11 @@ public class ControladorImpl implements Controlador {
     public void ejecucion(){
             try {
                 pasarUrlAModelo();
-                pasarRutaArchivosAModelor();
-                
+                pasarRutaArchivosAModelor();               
                 modelo.descargarFichero("");
+                modelo.setRutas(vista.getArchivoEscritura(),vista.getArchivoBinario(),vista.getArchivoXML());
+                
+                
                 modelo.csv.setRutaCsvEscritura(vista.getArchivoEscritura());
                 modelo.csv.introducirCamposColumna(vista.getColumnasCsv());
                 modelo.csv.setRutaCsvLectura(vista.getListaArchivos().get(0));

@@ -26,4 +26,6 @@ public interface Modelo {
      public void extraerConsulta(String rutaCsv,int numeroConsultas) throws IOException;
      
      public ArrayList<String> getListaConsultas();
+     
+     public void setRutas(String rutaCsv,String rutaDat,String rutaXml);
 }

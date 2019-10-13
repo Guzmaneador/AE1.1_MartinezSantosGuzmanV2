@@ -40,7 +40,7 @@ public class FicheroDat extends Fichero{
         String tipo =" ";
          
 //          while((!calle.equals("CALLE DONIS")) || (!tipo.equals("Envases"))){
-          while(contador != 4902){
+          while(contador != 4900){//numero de registros CSV
                
 
             puntero = contador * (tamañoContenedor*2);
